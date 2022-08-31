@@ -209,3 +209,9 @@ soldier = NodePath("../..")
 
 [node name="attack" type="Node" parent="states"]
 script = ExtResource( 3 )
+texture = NodePath("../../texture")
+camera = NodePath("../../camera")
+soldier = NodePath("../..")
+projectile_spawner = NodePath("../../projectile_spawner")
+
+[connection signal="animation_finished" from="animation" to="texture" method="_on_animation_finished"]
