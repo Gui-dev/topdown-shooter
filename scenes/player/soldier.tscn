@@ -163,6 +163,7 @@ vframes = 7
 script = ExtResource( 5 )
 parent = NodePath("..")
 animation = NodePath("../animation")
+projectile_spawner = NodePath("../projectile_spawner")
 
 [node name="collision" type="CollisionShape2D" parent="."]
 shape = SubResource( 7 )

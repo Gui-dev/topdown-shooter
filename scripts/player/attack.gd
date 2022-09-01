@@ -35,6 +35,25 @@ func attack() -> void:
     texture.action_behavior(weapons_list[weapon_index])
 
 
+func spawn_projectile(type: String) -> void:
+  var projectile_direction: Vector2 = (
+    soldier.get_global_mouse_position() - soldier.global_position
+  ).normalized()
+  var projectile = null
+  
+  match type:
+    'fire':
+      projectile = fire_projectile.instance()
+    'throw':
+      pass
+    
+  get_tree().root.call_deferred('add_child', projectile)
+  projectile.global_position = projectile_spawner.global_position
+  # Conectar o Sinal de camera shake
+  projectile.direction = projectile_direction
+  
+
+
 func can_shoot(type: String) -> bool:
   if type == 'fire' and projectile_amount > 0:
     return true
