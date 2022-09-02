@@ -19,6 +19,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/player/projectile.gd"
 }, {
+"base": "BaseProjectile",
+"class": "Grenade",
+"language": "GDScript",
+"path": "res://scripts/player/grenade.gd"
+}, {
 "base": "Node",
 "class": "MoveState",
 "language": "GDScript",
@@ -37,6 +42,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "AttackState": "",
 "BaseProjectile": "",
+"Grenade": "",
 "MoveState": "",
 "Soldier": "",
 "SoldierTexture": ""
