@@ -2,7 +2,7 @@ extends Node
 class_name AttackState
 
 
-#const Grenade: PackedScene = preload()
+const Grenade: PackedScene = preload('res://scenes/player/projectile/grenade.tscn')
 var weapons_list: Array = [ 'fire', 'throw']
 var weapon_index: int = 0
 var grenade_amount: int = 5
@@ -45,7 +45,7 @@ func spawn_projectile(type: String) -> void:
     'fire':
       projectile = fire_projectile.instance()
     'throw':
-      pass
+      projectile = Grenade.instance()
     
   get_tree().root.call_deferred('add_child', projectile)
   projectile.global_position = projectile_spawner.global_position
@@ -86,3 +86,24 @@ func verify_ammo_amount(weapon_type: String) -> void:
     
   if weapon_type == 'fire' and projectile_amount > projectile_max_amount:
     projectile_amount = projectile_max_amount
+
+
+func can_change_weapon_index(index: int) -> bool:
+  if index == 4 and weapon_index == weapons_list.size() -1:
+    return false
+    
+  if index == 5 and weapon_index == 0:
+    return false
+    
+  return true
+
+func _unhandled_input(event) -> void:
+  if not event is InputEventMouseButton:
+    return
+    
+  var event_as_number: int = event.button_index
+  if event_as_number == 4 and can_change_weapon_index(4):
+    weapon_index += 1
+    
+  if event_as_number == 5 and can_change_weapon_index(5):
+    weapon_index -= 1
