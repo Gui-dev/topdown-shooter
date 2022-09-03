@@ -6,7 +6,7 @@ const Grenade: PackedScene = preload('res://scenes/player/projectile/grenade.tsc
 var weapons_list: Array = [ 'fire', 'throw']
 var weapon_index: int = 0
 var grenade_amount: int = 5
-var max_granade_amount: int = 5
+var max_grenade_amount: int = 5
 var projectile_amount: int
 export(String) var class_weapon
 export(int) var projectile_max_amount
@@ -23,6 +23,7 @@ onready var weapons_dict: Dictionary = {
 
 func _ready() -> void:
   projectile_amount = projectile_max_amount
+  set_text(weapons_list[weapon_index])
 
 
 func attack() -> void:
@@ -81,8 +82,8 @@ func update_ammo(weapon_type: String, type: String, value: int) -> void:
   
 
 func verify_ammo_amount(weapon_type: String) -> void:
-  if weapon_type == 'throw' and grenade_amount > max_granade_amount:
-    grenade_amount = max_granade_amount
+  if weapon_type == 'throw' and grenade_amount > max_grenade_amount:
+    grenade_amount = max_grenade_amount
     
   if weapon_type == 'fire' and projectile_amount > projectile_max_amount:
     projectile_amount = projectile_max_amount
@@ -107,3 +108,15 @@ func _unhandled_input(event) -> void:
     
   if event_as_number == 5 and can_change_weapon_index(5):
     weapon_index -= 1
+    
+  set_text(weapons_list[weapon_index])
+
+
+func set_text(current_weapon: String) -> void:
+  get_tree().call_group('interface', 'set_current_weapon', weapons_dict[current_weapon])
+  
+  if current_weapon == 'throw':
+    get_tree().call_group('interface', 'set_ammo', grenade_amount, max_grenade_amount)
+    
+  if current_weapon == 'fire':
+    get_tree().call_group('interface', 'set_ammo', projectile_amount, projectile_max_amount)
