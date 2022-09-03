@@ -16,10 +16,16 @@ func _physics_process(delta: float) -> void:
   translate(direction * move_speed * delta)
 
 
+func spawn_explosion() -> void:
+  var explosion = explosion_effect.instance()
+  explosion.global_position = global_position
+  get_tree().root.call_deferred('add_child', explosion)
+
+
 func kill() -> void:
   emit_signal('camera_shake', shake_lifetime, shake_strength)
   already_destroyed = true
-#  spawn_explosion()
+  spawn_explosion()
   queue_free()
 
 
