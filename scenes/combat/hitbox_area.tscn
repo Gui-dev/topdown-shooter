@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scripts/environments/hitbox_area.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 5, 5 )
+
+[node name="hitbox_area" type="Area2D"]
+script = ExtResource( 1 )
+texture = NodePath("../texture")
+health_bar = NodePath("../health_bar")
+
+[node name="collision" type="CollisionShape2D" parent="."]
+shape = SubResource( 9 )
+
+[connection signal="area_entered" from="." to="." method="_on_hitbox_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_hitbox_area_body_entered"]
