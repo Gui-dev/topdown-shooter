@@ -60,3 +60,9 @@ func _on_animation_finished(anim_name: String) -> void:
   
   if anim_name == 'fire' or anim_name == 'throw':
     parent.is_attacking = false
+    
+  match anim_name:
+    'hit':
+      parent.set_physics_process(true)
+    'death':
+      get_tree().paused = true

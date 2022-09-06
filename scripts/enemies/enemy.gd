@@ -57,6 +57,10 @@ func get_player(player_reference: Soldier, navigation: Navigation2D) -> void:
     path.pop_front()
 
 
+func kill() -> void:
+  queue_free()
+
+
 func _on_monitoring_timer_timeout() -> void:
   change_monitoring_state(false)
 
