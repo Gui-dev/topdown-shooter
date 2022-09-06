@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/enemies/enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/robots/spider.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 8, 7.5 )
+extents = Vector2( 4, 2.5 )
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -38,6 +38,47 @@ tracks/0/keys = {
 "values": [ 5, 6, 7, 8 ]
 }
 
+[sub_resource type="GDScript" id=10]
+script/source = "extends HitboxArea
+class_name EnemyHitBox
+
+
+const DeathEffect: PackedScene = preload('res://scenes/effects/death_effect.tscn') 
+
+
+func update_health(damage:int, _type: String) -> void:
+  health -= damage
+  health_bar.update_value(health)
+  
+  if health <= 0:
+    spawn_effect()
+    get_parent().kill()
+
+
+func spawn_effect() -> void:
+  var death_effect = DeathEffect.instance()
+  death_effect.global_position = global_position
+  get_tree().root.call_deferred('add_child', death_effect)
+
+
+func _on_hitbox_area_entered(area: Area2D) -> void:
+  if area.name == 'hitbox_area':
+    return
+    
+  area.kill()
+  update_health(area.damage, '')
+
+
+func _on_hitbox_area_body_entered(_body: Node) -> void:
+  pass
+#  if body is Soldier:
+#    update_health(body.damage, 'decrease')
+#    body.set_collision()
+"
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 7.5, 6.5 )
+
 [node name="Spider" instance=ExtResource( 1 )]
 attack_cooldown = 3.0
 damage = 4
@@ -53,6 +94,7 @@ frame = 5
 [node name="collision" parent="." index="1"]
 position = Vector2( 0, -0.5 )
 shape = SubResource( 3 )
+disabled = false
 
 [node name="animation" parent="." index="3"]
 autoplay = "walk"
@@ -60,4 +102,12 @@ anims/RESET = SubResource( 1 )
 anims/walk = SubResource( 2 )
 
 [node name="notifier" parent="." index="4"]
-scale = Vector2( 0.8, 0.7 )
+scale = Vector2( 0.7, 0.6 )
+
+[node name="hitbox_area" parent="." index="6"]
+script = SubResource( 10 )
+health = 10
+
+[node name="collision" type="CollisionShape2D" parent="hitbox_area" index="0"]
+position = Vector2( 0.5, -0.5 )
+shape = SubResource( 11 )

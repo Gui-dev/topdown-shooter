@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/combat/health_bar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/enemies/enemy.gd" type="Script" id=2]
 [ext_resource path="res://scenes/combat/hitbox_area.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scripts/enemies/enemy_hitbox_area.gd" type="Script" id=4]
 
 [node name="Enemy" type="KinematicBody2D" groups=["enemy"]]
+collision_layer = 4
+collision_mask = 2
 script = ExtResource( 2 )
 
 [node name="texture" type="Sprite" parent="."]
@@ -22,6 +25,9 @@ disabled = true
 one_shot = true
 
 [node name="hitbox_area" parent="." instance=ExtResource( 3 )]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 4 )
 
 [connection signal="screen_entered" from="notifier" to="." method="_on_notifier_screen_entered"]
 [connection signal="screen_exited" from="notifier" to="." method="_on_notifier_screen_exited"]

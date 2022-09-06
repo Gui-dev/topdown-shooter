@@ -15,7 +15,7 @@ func _ready() -> void:
   health_bar.init_bar(health)
   
 
-func update_health(value: int, type: String) -> void:
+func update_health(value: int, type: String) -> void:   
   match type:
     'decrease':
       health -= value
@@ -39,5 +39,6 @@ func _on_hitbox_area_entered(_area: Area2D) -> void:
 
 
 func _on_hitbox_area_body_entered(body: Node) -> void:
-  update_health(body.damage, 'decrease')
-  body.set_collision()
+  if body is Enemy:
+    update_health(body.damage, 'decrease')
+    body.set_collision()
