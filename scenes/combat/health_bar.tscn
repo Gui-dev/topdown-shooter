@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://resources/health_bar.tres" type="Texture" id=1]
+[ext_resource path="res://scripts/environments/health_bar.gd" type="Script" id=2]
 
 [node name="health_bar" type="TextureProgress"]
 margin_left = -6.0
@@ -12,3 +13,6 @@ value = 100.0
 texture_under = ExtResource( 1 )
 texture_progress = ExtResource( 1 )
 tint_under = Color( 0.27451, 0.27451, 0.27451, 1 )
+script = ExtResource( 2 )
+
+[node name="tween" type="Tween" parent="."]
