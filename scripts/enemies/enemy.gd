@@ -4,7 +4,9 @@ class_name Enemy
 
 onready var texture: Sprite = $texture
 onready var collision: CollisionShape2D = $collision
+onready var animation: AnimationPlayer = $animation
 onready var monitoring_timer: Timer = $monitoring_timer
+#var is_near: bool = false
 var distance: float
 var path: Array = []
 var velocity: Vector2
@@ -29,13 +31,14 @@ export(int) var distance_threshhold
 
 
 func _physics_process(_delta: float) -> void:
+  animate()
   if distance < distance_threshhold:
+#    is_near = true
     return
     
+#  is_near = false
   velocity = move_and_slide(velocity)
   verify_direction()
-  animate()
-
 
 func verify_direction() -> void:
   if velocity.x > 0:
@@ -46,7 +49,11 @@ func verify_direction() -> void:
   
   
 func animate() -> void:
-  pass
+  if velocity != Vector2.ZERO:
+    animation.play('walk')
+    return
+    
+  animation.stop()
 
 
 func set_collision() -> void:
