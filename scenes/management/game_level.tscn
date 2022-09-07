@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=2]
+[gd_scene load_steps=81 format=2]
 
 [ext_resource path="res://scenes/player/assault.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/management/interface.tscn" type="PackedScene" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://scripts/management/game_level.gd" type="Script" id=5]
 [ext_resource path="res://scenes/enemies/spider.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scripts/management/layered_objects.gd" type="Script" id=7]
+[ext_resource path="res://scenes/player/projectile/main_weapon_ammo.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/player/projectile/grenade_ammo.tscn" type="PackedScene" id=9]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -1228,12 +1230,6 @@ tile_data = PoolIntArray( 0, 0, 2, 1, 0, 131074, 2, 0, 131074, 3, 0, 131074, 4, 
 
 [node name="Assault" parent="." instance=ExtResource( 1 )]
 position = Vector2( 29, 30 )
-collision_layer = 1
-
-[node name="Spider" parent="." instance=ExtResource( 6 )]
-position = Vector2( 288, 161 )
-collision_layer = 1
-collision_mask = 1
 
 [node name="layered_objects" type="YSort" parent="."]
 script = ExtResource( 7 )
@@ -1245,6 +1241,7 @@ cell_size = Vector2( 16, 16 )
 cell_tile_origin = 2
 cell_y_sort = true
 centered_textures = true
+collision_mask = 0
 format = 1
 tile_data = PoolIntArray( 131096, 9, 0, 131110, 5, 0, 131111, 4, 0, 196614, 0, 0, 262180, 0, 0, 458777, 15, 0, 458781, 19, 0, 589831, 17, 0, 720932, 1, 0, 786457, 0, 0, 917516, 0, 0, 917521, 21, 0, 983054, 24, 0, 1048601, 18, 0, 1376282, 0, 0, 1507332, 13, 0, 1507338, 11, 0, 1572895, 10, 0, 1638418, 0, 0, 1703943, 0, 0, 1703972, 0, 0, 1900576, 2, 0, 1900579, 6, 0, 1900580, 7, 0, 1966094, 2, 0 )
 
@@ -1252,5 +1249,16 @@ tile_data = PoolIntArray( 131096, 9, 0, 131110, 5, 0, 131111, 4, 0, 196614, 0, 0
 wait_time = 1.5
 one_shot = true
 autostart = true
+
+[node name="Spider" parent="." instance=ExtResource( 6 )]
+position = Vector2( 288, 161 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="MainWeaponAmmo" parent="." instance=ExtResource( 8 )]
+position = Vector2( 86, 119 )
+
+[node name="GrenadeAmmo" parent="." instance=ExtResource( 9 )]
+position = Vector2( 131, 106 )
 
 [connection signal="timeout" from="layered_objects/timer" to="layered_objects" method="_on_timer_timeout"]

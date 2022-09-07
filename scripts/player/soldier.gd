@@ -13,5 +13,3 @@ func _physics_process(_delta: float) -> void:
   move_state.move()
   attack_state.attack()
   texture.animate(move_state.velocity)
-  pass
-  

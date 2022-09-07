@@ -9,7 +9,6 @@ onready var base_terrain: TileMap = $terrain/base_terrain
 onready var layered_objects: YSort = $layered_objects
 var avaliable_spawn_tiles_list: Array = []
 
-
 func _ready() -> void:
   define_camera_limit()
   set_spawn_tiles()
