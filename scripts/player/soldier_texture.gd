@@ -65,5 +65,4 @@ func _on_animation_finished(anim_name: String) -> void:
     'hit':
       parent.set_physics_process(true)
     'death':
-      yield(get_tree().create_timer(1), 'timeout')
       get_tree().call_group('interface', 'reload_game')

@@ -84,6 +84,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/player/soldier.gd"
 }, {
+"base": "Camera2D",
+"class": "SoldierCamera",
+"language": "GDScript",
+"path": "res://scripts/player/camera.gd"
+}, {
 "base": "Sprite",
 "class": "SoldierTexture",
 "language": "GDScript",
@@ -105,6 +110,7 @@ _global_script_class_icons={
 "LayeredObjects": "",
 "MoveState": "",
 "Soldier": "",
+"SoldierCamera": "",
 "SoldierTexture": ""
 }
 
