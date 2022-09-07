@@ -8,6 +8,16 @@ onready var monitoring_timer: Timer = $monitoring_timer
 var distance: float
 var path: Array = []
 var velocity: Vector2
+var items_dict: Dictionary = {
+  'MW Ammo': [
+    [1, 40],
+    preload('res://scenes/player/projectile/main_weapon_ammo.tscn')
+   ],
+  'Grenade Ammo': [
+    [41, 60],
+    preload('res://scenes/player/projectile/grenade_ammo.tscn')
+   ]  
+}
 export(float) var attack_cooldown
 export(int) var damage
 export(int) var move_speed
@@ -57,7 +67,30 @@ func get_player(player_reference: Soldier, navigation: Navigation2D) -> void:
     path.pop_front()
 
 
+func spawn_item(item_to_spawn: PackedScene) -> void:
+  var item = item_to_spawn.instance()
+  item.global_position = global_position
+  get_tree().root.call_deferred('add_child', item)
+
+
+func get_item(item_key: String) -> void:
+  var random_number: int = randi() % 100 + 1
+  var drop_probability_list: Array = items_dict[item_key][0]
+  var min_number: int = drop_probability_list[0]
+  var max_number: int = drop_probability_list[1]
+  
+  if random_number >= min_number and random_number <= max_number:
+    spawn_item(items_dict[item_key][1])
+  
+
+func roll_dice() -> void:
+  for item in items_dict.keys():
+    get_item(item)
+    
+
+
 func kill() -> void:
+  roll_dice()
   queue_free()
 
 
