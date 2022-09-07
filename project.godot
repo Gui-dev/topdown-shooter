@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Area2D",
+"class": "Ammo",
+"language": "GDScript",
+"path": "res://scripts/player/base_ammo.gd"
+}, {
 "base": "Node",
 "class": "AttackState",
 "language": "GDScript",
@@ -80,6 +85,7 @@ _global_script_classes=[ {
 "path": "res://scripts/player/soldier_texture.gd"
 } ]
 _global_script_class_icons={
+"Ammo": "",
 "AttackState": "",
 "BaseProjectile": "",
 "Effect": "",
@@ -152,6 +158,7 @@ ui_attack={
 2d_physics/layer_1="Map"
 2d_physics/layer_2="Player"
 2d_physics/layer_3="Enemy"
+2d_physics/layer_4="Collectable"
 
 [physics]
 
