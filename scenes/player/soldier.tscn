@@ -193,7 +193,7 @@ anims/walk = SubResource( 3 )
 
 [node name="hitbox_area" parent="." instance=ExtResource( 6 )]
 collision_layer = 0
-collision_mask = 4
+collision_mask = 12
 
 [node name="projectile_spawner" type="Position2D" parent="."]
 

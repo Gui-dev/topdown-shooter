@@ -16,6 +16,10 @@ var items_dict: Dictionary = {
   'Grenade Ammo': [
     [41, 60],
     preload('res://scenes/player/projectile/grenade_ammo.tscn')
+   ],
+  'Health': [
+    [61, 80],
+    preload('res://scenes/combat/health.tscn')
    ]  
 }
 export(float) var attack_cooldown
