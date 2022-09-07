@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/player/projectile/base_ammo.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/interface/icon_set.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+
+[node name="GrenadeAmmo" instance=ExtResource( 1 )]
+amount = 5
+type = "throw"
+
+[node name="texture" parent="." index="0"]
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 16, 16, 16, 16 )
+
+[node name="collision" parent="." index="1"]
+shape = SubResource( 1 )
