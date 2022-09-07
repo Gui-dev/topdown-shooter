@@ -6,7 +6,7 @@ const CELL_SIZE: int = 16
 onready var parent: Node2D = get_parent()
 onready var timer: Timer = $timer
 var avaliable_cells: Array = []
-var spawn_cooldown: float = 1.5
+var spawn_cooldown: float = 2.0
 export(Array, PackedScene) var enemies_list
 
 
