@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=2]
+[gd_scene load_steps=79 format=2]
 
 [ext_resource path="res://scenes/player/assault.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/management/interface.tscn" type="PackedScene" id=2]
@@ -7,8 +7,6 @@
 [ext_resource path="res://scripts/management/game_level.gd" type="Script" id=5]
 [ext_resource path="res://scenes/enemies/spider.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scripts/management/layered_objects.gd" type="Script" id=7]
-[ext_resource path="res://scenes/player/projectile/main_weapon_ammo.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/player/projectile/grenade_ammo.tscn" type="PackedScene" id=9]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -1249,16 +1247,5 @@ tile_data = PoolIntArray( 131096, 9, 0, 131110, 5, 0, 131111, 4, 0, 196614, 0, 0
 wait_time = 1.5
 one_shot = true
 autostart = true
-
-[node name="Spider" parent="." instance=ExtResource( 6 )]
-position = Vector2( 288, 161 )
-collision_layer = 1
-collision_mask = 1
-
-[node name="MainWeaponAmmo" parent="." instance=ExtResource( 8 )]
-position = Vector2( 86, 119 )
-
-[node name="GrenadeAmmo" parent="." instance=ExtResource( 9 )]
-position = Vector2( 131, 106 )
 
 [connection signal="timeout" from="layered_objects/timer" to="layered_objects" method="_on_timer_timeout"]
